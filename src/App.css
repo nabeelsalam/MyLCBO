@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.lcbo-card{
+  max-width: 340px;
+}
+.lcbo-card-media{
+  height: 340px;
+}
+.root{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: hidden;
+}
+.cardGrid{
+  margin: 84px 10px 10px 10px;
+}
+.gridList{
+  width: 500;
+  height: 450;
+}
+.icon{
+  color: rgba(255, 255, 255, 0.54);
+}
+.layout{
+  width: auto;
+}
+
+.card{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.cardMedia{
+  padding-top: 56.25%;
+}
+.cardContent{
+  flex-grow: 1;
+}
