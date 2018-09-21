@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CardActions from '@material-ui/core/CardActions';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import './App.css';
 
@@ -47,7 +48,7 @@ const ProductListComponent = (props) => {
   return (
     <div className="layout cardGrid">
         <Grid container spacing={40}>
-          {props.products && props.products
+          {props.products
           .map(product => {
             let price = product.price_in_cents;
             price = price / 100;
@@ -87,30 +88,41 @@ const ProductListComponent = (props) => {
 };
 
 class App extends Component {
+
   constructor(props){
     super(props);
     this.state = {
       products: []
     };
   }
+
   componentDidMount() {
     fetch(`${URLs.base}${URLs.products}`)
       .then(response => response.json())
       .then(data => this.setState({ products: data.result }))
       .catch(err => console.log(err));
   }
+
   handleChange = event => {
     fetch(`${URLs.base}${URLs.products}?searchText=${event.target.value}`)
       .then(response => response.json())
       .then(data => this.setState({ products: data.result }))
       .catch(err => console.log(err));  
   }
+
   render() {
     const {products} = this.state;
+    let body;
+    if(products.length > 0){
+      body = <ProductListComponent products={products}></ProductListComponent>;
+    }
+    else{
+      body = <div className="progress-bar"><LinearProgress /></div>;
+    }
     return (
       <div>
         <HeaderComponent onChange={this.handleChange}></HeaderComponent>
-        <ProductListComponent products={products}></ProductListComponent>
+        {body}
     </div> 
     );
   }

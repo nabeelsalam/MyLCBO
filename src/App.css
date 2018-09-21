@@ -64,3 +64,6 @@
 .cardContent{
   flex-grow: 1;
 }
+.progress-bar{
+  margin-top: 64px;
+}
