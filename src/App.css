@@ -67,3 +67,13 @@
 .progress-bar{
   margin-top: 64px;
 }
+.formControl{
+  min-width: 120px !important;
+  height: 64px;
+}
+.badge{
+  padding-right: 14px;
+  flex-grow: 1;
+  text-align: end;
+  display: inline-block !important;
+}
