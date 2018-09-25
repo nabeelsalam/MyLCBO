@@ -79,6 +79,12 @@ const HeaderComponent = props => {
           placeholder="Postal Code"
           className="dense"
           onChange={props.onPostalCodeChange}
+          InputProps={{
+            startAdornment: <InputAdornment position="start"><i className="material-icons">local_post_office</i></InputAdornment>,
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
       />
       {storeSelector}
     </Toolbar>
