@@ -75,11 +75,9 @@ const HeaderComponent = props => {
       />
       <TextField
           id="outlined-dense"
-          label="Postal Code"
           value={props.postalCode}
+          placeholder="Postal Code"
           className="dense"
-          margin="dense"
-          variant="outlined"
           onChange={props.onPostalCodeChange}
       />
       {storeSelector}
