@@ -94,7 +94,7 @@ const ProductListComponent = (props) => {
           .map(product => {
             let price = product.price_in_cents;
             price = price / 100;
-            product.price_in_dollars = price.toLocaleString("en-US", {style:"currency", currency:"USD"});   
+            product.price_in_dollars = price.toLocaleString("en-CA", {style:"currency", currency:"CAD"});   
             return product;  
           })
           .map(card => (
@@ -110,7 +110,7 @@ const ProductListComponent = (props) => {
                   {card.name}
                   </Typography>
                   <Typography>
-                  {card.tasting_note}
+                  {card.tasting_note} (From: {card.origin})
                   </Typography>
                   <Typography variant="body2">
                   {card.alcohol_content/100}% good stuff
