@@ -27,16 +27,16 @@ const URLs={
 
 const HeaderComponent = props => {
   let storeSelector = '';
-  if(props.stores.length > 0 ){
+  if(props.stores && props.stores.length > 0 ){
     storeSelector =   <form className="" autoComplete="off">
     <FormControl className="formControl">
-      <InputLabel htmlFor="age-simple">Your Store</InputLabel>
+      <InputLabel htmlFor="store-selector">Your Store</InputLabel>
       <Select
         value={props.selectedStore}
         onChange={props.onStoreChange}
         inputProps={{
-          name: 'age',
-          id: 'age-simple',
+          name: 'store',
+          id: 'store-selector',
         }}
       >
       <MenuItem value="">
@@ -73,8 +73,16 @@ const HeaderComponent = props => {
         }}
         onChange={props.onChange}
       />
+      <TextField
+          id="outlined-dense"
+          label="Postal Code"
+          value={props.postalCode}
+          className="dense"
+          margin="dense"
+          variant="outlined"
+          onChange={props.onPostalCodeChange}
+      />
       {storeSelector}
-
     </Toolbar>
   </AppBar> 
   )
@@ -105,6 +113,9 @@ const ProductListComponent = (props) => {
                   </Typography>
                   <Typography>
                   {card.tasting_note}
+                  </Typography>
+                  <Typography variant="body2">
+                  {card.alcohol_content/100}% good stuff
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -140,19 +151,21 @@ class App extends Component {
       products: [],
       stores: [],
       selectedStore: 0,
-      searchTerm: ''
+      searchTerm: '',
+      postalCodeSearchTerm: ''
     };
   }
 
   componentDidMount() {
+    const postalCode = localStorage.getItem('LCBOPostalCode');
     this.getProducts();
-    this.getStores();
+    this.getStores(postalCode);
   }
 
-  getStores(){
-    fetch(`${URLs.base}${URLs.stores}`)
+  getStores(postalCode){
+    fetch(`${URLs.base}${URLs.stores}?searchText=${postalCode}`)
       .then(response => response.json())
-      .then(data => this.setState({ stores: data.result }))
+      .then(data => this.setState({ stores: data.result , postalCodeSearchTerm: postalCode}))
       .catch(err => console.log(err));
   }
 
@@ -198,10 +211,16 @@ class App extends Component {
     this.getProducts();
   }
 
-  render() {
-    const {products, stores, selectedStore } = this.state;
-    let body;
+  handlePostalCodeChange = event => {
+    let postalCode = event.target.value;
+    localStorage.setItem('LCBOPostalCode', postalCode);
+    this.getStores(postalCode);
+  }
 
+  render() {
+    const {products, stores, selectedStore, postalCodeSearchTerm } = this.state;
+    let body;
+    
     if(products.length > 0){
       body = <ProductListComponent products={products}></ProductListComponent>;
     }
@@ -213,7 +232,9 @@ class App extends Component {
         <HeaderComponent 
           stores={stores} 
           selectedStore = {selectedStore} 
+          postalCode = {postalCodeSearchTerm}
           onStoreChange={this.handleStoreChange}
+          onPostalCodeChange={this.handlePostalCodeChange}
           onChange={this.handleSearch}>
         </HeaderComponent>
         {body}
