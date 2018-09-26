@@ -21,7 +21,7 @@ import './App.css';
 const URLs={
   base: 'http://localhost:8005/',
   baseLCBO: 'https://lcboapi.com/',
-  apiKey: 'MDplMGY4ZTBkYy1iYzIxLTExZTgtOTU3Zi0xYmRjOWEzMWZmNzk6VE43QWZmYUZCRXRFazcwMXZKWnFBNEhzYTREVVJrYW92V3BG',
+  apiKey: 'MDpkNDBhNjk4Mi1jMTk4LTExZTgtODZhMy1hYmY1MDI0NjYwODU6TEhtYWxOaXU0WkE1QldwUlpYUm0yRktvbzJNZ0hES1NqVW1J',
   products: 'products',
   stores: 'stores',
   stock: 'stock'
