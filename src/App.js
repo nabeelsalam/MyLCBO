@@ -173,7 +173,7 @@ class App extends Component {
     fetch(`${URLs.baseLCBO}${URLs.stores}?access_key=${URLs.apiKey}&per_page=50${postalCode?`&geo=${postalCode}`:''}`)
       .then(response => response.json())
       .then(data => this.setState({ stores: data.result , postalCodeSearchTerm: postalCode}))
-      .catch(err => console.log(err));
+      .catch(err => this.setState({postalCodeSearchTerm: postalCode}));
   }
 
   getProducts(){
