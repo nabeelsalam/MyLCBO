@@ -187,24 +187,31 @@ class App extends Component {
 
   getStock(){
     const productIds = this.state.products.map(product => product.id);
-    fetch(`${URLs.base}${URLs.stock}`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        store: this.state.selectedStore,
-        productIds
-      })
-    }).then(res=>res.json())
-      .then(stock => {
-        let {products} = this.state;
-        products.map(product => {
-          product.stock = stock[product.id]
+
+    let promises = [];
+    productIds.forEach(id => {
+        let url =  `${URLs.baseLCBO}/stores/${this.state.selectedStore}/products/${id}/inventory?access_key=${URLs.apiKey}`;
+        promises.push(new Promise((resolve)=>{
+          fetch(url)
+          .then(res=>res.json())
+          .then(res=>resolve(res))
+        }))
+    });
+    Promise.all(promises)
+        .then((results) => {
+            console.log(results)
+            let stockObject = {}
+            results.forEach((el,index) => {
+                let key = productIds[index];
+                stockObject[key] = JSON.parse(el).result;               
+            });
+            let {products} = this.state;
+            products.map(product => {
+              product.stock = stockObject[product.id]
+            })
+            this.setState({ products })
         })
-        this.setState({ products })
-      });
+        .catch(err => console.log(err));
   }
 
   handleSearch = event => {
