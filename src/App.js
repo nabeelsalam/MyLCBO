@@ -183,8 +183,7 @@ class App extends Component {
     .then(data => {
       this.setState({ products: data.result });
       this.getStock();
-    })
-    .catch(err => console.log(err));  
+    }) 
   }
 
   getStock(){
@@ -214,7 +213,6 @@ class App extends Component {
             })
             this.setState({ products })
         })
-        .catch(err => console.log(err));
   }
 
   handleSearch = event => {
