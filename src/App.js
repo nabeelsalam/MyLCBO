@@ -24,7 +24,8 @@ const URLs={
   apiKey: 'MDpkNDBhNjk4Mi1jMTk4LTExZTgtODZhMy1hYmY1MDI0NjYwODU6TEhtYWxOaXU0WkE1QldwUlpYUm0yRktvbzJNZ0hES1NqVW1J',
   products: 'products',
   stores: 'stores',
-  stock: 'stock'
+  stock: 'stock',
+  inventory: 'inventory'
 }
 
 const HeaderComponent = props => {
@@ -190,7 +191,7 @@ class App extends Component {
 
     let promises = [];
     productIds.forEach(id => {
-        let url =  `${URLs.baseLCBO}/stores/${this.state.selectedStore}/products/${id}/inventory?access_key=${URLs.apiKey}`;
+        let url =  `${URLs.baseLCBO}${URLs.stores}/${this.state.selectedStore}/${URLs.products}/${id}/${URLs.inventory}?access_key=${URLs.apiKey}`;
         promises.push(new Promise((resolve)=>{
           fetch(url)
           .then(res=>res.json())
