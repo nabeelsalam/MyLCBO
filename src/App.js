@@ -20,7 +20,7 @@ import './App.css';
 
 const URLs={
   base: 'http://localhost:8005/',
-  baseLCBO: 'http://lcboapi.com/',
+  baseLCBO: 'https://lcboapi.com/',
   apiKey: 'MDplMGY4ZTBkYy1iYzIxLTExZTgtOTU3Zi0xYmRjOWEzMWZmNzk6VE43QWZmYUZCRXRFazcwMXZKWnFBNEhzYTREVVJrYW92V3BG',
   products: 'products',
   stores: 'stores',
