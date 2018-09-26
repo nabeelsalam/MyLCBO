@@ -2,11 +2,13 @@
   "name": "lcbo-api-test",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nabeelsalam.github.io/MyLCBO/",
   "dependencies": {
     "@material-ui/core": "^3.1.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "gh-pages": "^2.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "1.1.5",
@@ -17,6 +19,7 @@
     "start-server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   }
 }

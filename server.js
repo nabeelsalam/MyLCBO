@@ -15,28 +15,17 @@ app.listen(8005, () => {
 })
 
 app.get('/products', (req, res) => {
-    let url =  `${BASE_URL}/products?access_key=${API_KEY}`;
-    if(req.query.searchText && req.query.searchText.length > 0){
-        url+=`&q=${req.query.searchText}`;
-    }
-    if(req.query.store && req.query.store != 0){
-        url+=`&store_id=${req.query.store}`;
-    }
-    console.log('Received hit: '+url)
-  request(url, (error, response, body) => {
-    res.send(body)
-  })
+    console.log(req)
+    request(req.url, (error, response, body) => {
+        res.send(body)
+      })
 })
 
 app.get('/stores', (req, res) => {
-    let url =  `${BASE_URL}/stores?per_page=50&access_key=${API_KEY}`;
-    if(req.query.searchText){
-        url+=`&geo=${req.query.searchText}`;
-    }
-    console.log('Received hit: '+url)
-  request(url, (error, response, body) => {
-    res.send(body)
-  })
+    console.log(req)
+    request(req.url, (error, response, body) => {
+        res.send(body)
+    })
 })
 
 app.post('/stock', function(req, res) {

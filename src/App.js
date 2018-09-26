@@ -20,6 +20,8 @@ import './App.css';
 
 const URLs={
   base: 'http://localhost:8005/',
+  baseLCBO: 'http://lcboapi.com/',
+  apiKey: 'MDplMGY4ZTBkYy1iYzIxLTExZTgtOTU3Zi0xYmRjOWEzMWZmNzk6VE43QWZmYUZCRXRFazcwMXZKWnFBNEhzYTREVVJrYW92V3BG',
   products: 'products',
   stores: 'stores',
   stock: 'stock'
@@ -167,14 +169,14 @@ class App extends Component {
   }
 
   getStores(postalCode){
-    fetch(`${URLs.base}${URLs.stores}?searchText=${postalCode}`)
+    fetch(`${URLs.baseLCBO}${URLs.stores}?access_key=${URLs.apiKey}&per_page=50${postalCode?`&geo=${postalCode}`:''}`)
       .then(response => response.json())
       .then(data => this.setState({ stores: data.result , postalCodeSearchTerm: postalCode}))
       .catch(err => console.log(err));
   }
 
   getProducts(){
-    fetch(`${URLs.base}${URLs.products}?searchText=${this.state.searchTerm}&store=${this.state.selectedStore}`)
+    fetch(`${URLs.baseLCBO}${URLs.products}?access_key=${URLs.apiKey}${this.state.searchTerm?`&q=${this.state.searchTerm}`:''}${this.state.selectedStore?`&store_id=${this.state.selectedStore}`:''}`)
     .then(response => response.json())
     .then(data => {
       this.setState({ products: data.result });
