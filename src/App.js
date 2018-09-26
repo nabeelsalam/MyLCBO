@@ -204,7 +204,7 @@ class App extends Component {
             let stockObject = {}
             results.forEach((el,index) => {
                 let key = productIds[index];
-                stockObject[key] = JSON.parse(el).result;               
+                stockObject[key] = el.result;               
             });
             let {products} = this.state;
             products.map(product => {
