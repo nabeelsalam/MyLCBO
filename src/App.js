@@ -197,7 +197,7 @@ class App extends Component {
           fetch(url)
           .then(res=>res.json())
           .then(res=>resolve(res))
-          .catch(err => resolve(null));  
+          .catch(err => resolve({result:null}));  
         }))
     });
     Promise.all(promises)
