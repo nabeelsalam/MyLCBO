@@ -170,6 +170,7 @@ class App extends Component {
   }
 
   getStores(postalCode){
+    this.setState({postalCodeSearchTerm: postalCode})
     fetch(`${URLs.baseLCBO}${URLs.stores}?access_key=${URLs.apiKey}&per_page=50${postalCode?`&geo=${postalCode}`:''}`)
       .then(response => response.json())
       .then(data => this.setState({ stores: data.result , postalCodeSearchTerm: postalCode}))
