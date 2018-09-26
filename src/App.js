@@ -201,7 +201,6 @@ class App extends Component {
     });
     Promise.all(promises)
         .then((results) => {
-            console.log(results)
             let stockObject = {}
             results.forEach((el,index) => {
                 let key = productIds[index];
